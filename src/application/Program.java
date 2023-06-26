@@ -21,15 +21,17 @@ public class Program {
 		myCircle.add(new Circle(3.0));
 
 		// Vai dar um erro de casting, por que o listShpe nao e um super tipo de
-		// myCircle
+		// myCircle. Para funcionar eu preciso implementar no meu metodo o tipo curinga
+		// extendendo a classe Shape
 
-		// System.out.println(String.format("Total area " + "%.2f",
-		// totalArea(myCircle)));
+		System.out.println(String.format("Total area Circulo " + "%.2f", totalArea(myCircle)));
 
 		System.out.println(String.format("Total area " + "%.2f", totalArea(myShapes)));
 	}
 
-	public static double totalArea(List<Shape> lista) {
+	// essa minha lista pode ser de shape ou de qq SUBTIPO DE SHAPE
+	// ELE VAI ACEITAR UMA LISTA DE CIRCULO E DE RETANGLO
+	public static double totalArea(List<? extends Shape> lista) {
 		double sum = 0.0;
 		for (Shape shape : lista) {
 
