@@ -1,44 +1,38 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import entities.Circle;
-import entities.Retangle;
-import entities.Shape;
 
 public class Program {
 
 	public static void main(String[] args) {
-		List<Shape> myShapes = new ArrayList<>();
+		List<Integer> myInts = Arrays.asList(1, 2, 3, 4);
+		List<Double> myDoubles = Arrays.asList(3.14, 6.28);
+		List<Object> myObjs = new ArrayList<Object>();
 
-		myShapes.add(new Retangle(2.0, 3.0));
-		myShapes.add(new Circle(2.0));
-
-		List<Circle> myCircle = new ArrayList<>();
-
-		myCircle.add(new Circle(2.0));
-		myCircle.add(new Circle(3.0));
-
-		// Vai dar um erro de casting, por que o listShpe nao e um super tipo de
-		// myCircle. Para funcionar eu preciso implementar no meu metodo o tipo curinga
-		// extendendo a classe Shape
-
-		System.out.println(String.format("Total area Circulo " + "%.2f", totalArea(myCircle)));
-
-		System.out.println(String.format("Total area " + "%.2f", totalArea(myShapes)));
+		copy(myInts, myObjs);
+		printList(myObjs);
+		System.out.println();
+		copy(myDoubles, myObjs);
+		printList(myObjs);
 	}
 
-	// essa minha lista pode ser de shape ou de qq SUBTIPO DE SHAPE
-	// ELE VAI ACEITAR UMA LISTA DE CIRCULO E DE RETANGLO
-	public static double totalArea(List<? extends Shape> lista) {
-		double sum = 0.0;
-		for (Shape shape : lista) {
+	// qualquer numerico(Covariança subTipos eu posso somente acessar)
+	// lista mais generica que number(contravariança Trabalha com o super tipo do
+	// tipo informado eu posso somente adicionar )
+	public static void copy(List<? extends Number> source, List<? super Number> destiny) {
+		// para cada Number number na lista de origem
 
-			sum = sum + shape.area();
+		for (Number number : source) {
+			destiny.add(number);
 		}
+	}
 
-		return sum;
+	public static void printList(List<?> list) {
+		for (Object lista : list) {
+			System.out.print(lista + " ");
+		}
 	}
 
 }
